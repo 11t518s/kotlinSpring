@@ -44,5 +44,4 @@ public class UserService {
     User user = userRepository.findByName(name).orElseThrow(IllegalArgumentException::new);
     userRepository.delete(user);
   }
-
 }
