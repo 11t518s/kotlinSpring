@@ -11,7 +11,7 @@ public class UserResponse {
   public UserResponse(User user) {
     this.id = user.getId();
     this.name = user.getName();
-    this.age = user.getAge();
+    this.age = Math.toIntExact(user.getAge());
   }
 
   public long getId() {

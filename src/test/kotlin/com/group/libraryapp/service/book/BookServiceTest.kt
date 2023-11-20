@@ -9,8 +9,6 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
-import com.group.libraryapp.dto.user.request.UserCreateRequest
-import com.group.libraryapp.service.user.UserService
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -51,7 +49,7 @@ class BookServiceTest @Autowired constructor(
         // given
         val book = bookRepository.save(Book("A"))
         println(book)
-        val user = userRepository.save(User("userA", null))
+        val user = userRepository.save(User("userA",  null))
         val request = BookLoanRequest(user.name, book.name)
 
         // when
