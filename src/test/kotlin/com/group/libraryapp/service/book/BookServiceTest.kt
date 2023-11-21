@@ -48,7 +48,6 @@ class BookServiceTest @Autowired constructor(
     fun loanBookTest() {
         // given
         val book = bookRepository.save(Book("A"))
-        println(book)
         val user = userRepository.save(User("userA",  null))
         val request = BookLoanRequest(user.name, book.name)
 
