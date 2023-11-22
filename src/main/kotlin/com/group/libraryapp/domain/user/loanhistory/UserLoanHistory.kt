@@ -1,10 +1,7 @@
 package com.group.libraryapp.domain.user.loanhistory
 
 import com.group.libraryapp.domain.user.User
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.*
 
 @Entity
 class UserLoanHistory(
@@ -13,14 +10,31 @@ class UserLoanHistory(
     val user: User,
 
     val bookName: String,
-    var isReturn: Boolean,
+
+    var status: UserLoanStatus = UserLoanStatus.LOANED,
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 ) {
 
     fun doReturn() {
-        this.isReturn = true
+        this.status = UserLoanStatus.RETURNED
+    }
+
+    companion object {
+        fun fixture(
+            user: User,
+            bookName: String = "이상한 나라의 앨리스",
+            status: UserLoanStatus = UserLoanStatus.LOANED,
+            id: Int? = null
+        ): UserLoanHistory {
+            return UserLoanHistory(
+                user = user,
+                bookName = bookName,
+                status = status,
+                id = id,
+            )
+        }
     }
 }
