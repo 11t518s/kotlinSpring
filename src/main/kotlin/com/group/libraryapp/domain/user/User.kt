@@ -4,7 +4,6 @@ import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
 import javax.persistence.CascadeType
-import javax.persistence.CascadeType.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -18,7 +17,7 @@ class User(
     val age: Int?,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val userLoanHistory: MutableList<UserLoanHistory> = mutableListOf(),
+    val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf(),
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,11 +34,11 @@ class User(
     }
 
     fun loanBook(book: Book) {
-        this.userLoanHistory.add(UserLoanHistory(this, book.name, UserLoanStatus.LOANED))
+        this.userLoanHistories.add(UserLoanHistory(this, book.name, UserLoanStatus.LOANED))
     }
 
     fun returnBook(bookName: String) {
-        this.userLoanHistory.first {
+        this.userLoanHistories.first {
             history -> history.bookName == bookName
         }.doReturn()
     }
